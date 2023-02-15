@@ -35,12 +35,12 @@ class BasicDialog(context: Context) : AppCompatDialogFragment() {
         okBtnTV.text = okBtnText
         cancelBtnTV.text = cancelBtn
 
-        positive_btn.setOnClickListener {
+        okBtnTV.setOnClickListener {
             dismiss()
             basicDialogListeners?.okButtonClicked()
         }
 
-        negative_btn.setOnClickListener {
+        cancelBtnTV.setOnClickListener {
             dismiss()
             basicDialogListeners?.cancelButtonClicked()
         }
