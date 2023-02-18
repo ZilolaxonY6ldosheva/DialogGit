@@ -88,6 +88,7 @@ dependencies {
         checkBoxDialog.show(supportFragmentManager, "checkbox_dialog")
     }
 ```
+
 >Date and Time Picker Dialog
 ```
  private fun dateDialog() {
