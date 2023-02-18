@@ -8,8 +8,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.customdialoggit.databinding.ActivityMainBinding
-import com.example.dialoggit.classes.BasicDialog
-import com.example.dialoggit.classes.DateAndTimeDialog
+import com.example.dialoggit.classes.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -26,14 +25,50 @@ class MainActivity : AppCompatActivity() {
             dateDialog()
         }
 
+        binding.colorsheetDialog.setOnClickListener {
+            colorDialog()
+        }
 
+        binding.checkboxDialog.setOnClickListener {
+            openCheckBoxDialog()
+        }
+
+        binding.wifiDialog.setOnClickListener {
+            wifiDialog()
+        }
+
+
+    }
+
+    private fun wifiDialog() {
+        val dialog = WifiDialog()
+        dialog.show(supportFragmentManager, "wifi_dialog")
+        dialog.createDialog("Google wifi", "Pixel 2 A", "i929uui4ui", "Wpa2")
+        dialog.setonButtonsCLickedListener(object : WifiDialog.WiFiDialogListeners {
+            override fun okButtonClicked(password: String) {
+                Toast.makeText(this@MainActivity, "$password", Toast.LENGTH_SHORT).show()
+            }
+            override fun cancelButtonClicked() {}
+        })
+
+
+    }
+
+    private fun colorDialog() {
+        val dialog = ColorDialog()
+        dialog.show(supportFragmentManager, "color_dialog")
+        dialog.setOnColorSelectedListener(object : ColorDialog.OnColorSelectListener {
+            override fun OnColorSelected(color: Int) {
+                binding.colorsheetDialog.setBackgroundColor(color)
+            }
+
+        })
     }
 
     private fun dateDialog() {
         val dialog = DateAndTimeDialog()
-
         dialog.show(supportFragmentManager, "date_dialog")
-        dialog.setOnOkButtonClicked(object : DateAndTimeDialog.OnButtonClicked{
+        dialog.setOnOkButtonClicked(object : DateAndTimeDialog.OnButtonClicked {
             override fun OnOkButtonClicked(datePicker: DatePicker, timePicker: TimePicker) {
                 val date = "${datePicker.dayOfMonth}.${datePicker.month}.${datePicker.year}  " +
                         "${timePicker.hour}:${timePicker.minute}"
@@ -47,14 +82,11 @@ class MainActivity : AppCompatActivity() {
     private fun basicDialog() {
         val basicDialog = BasicDialog(this)
         basicDialog.createDialog(
-            "What's your name?", " override fun onCreate(savedInstanceState: Bundle?) {\n" +
-                    "        super.onCreate(savedInstanceState)\n" +
-                    "        binding = ActivityMainBinding.inflate(layoutInflater)\n" +
-                    "        setContentView(binding.root)\n" +
-                    "\n" +
-                    "        binding.basicDialog.setOnClickListener {\n" +
-                    "            basicDialog()\n" +
-                    "        }", "Agree", "Disagree"
+            title = "Lorem ipsum?",
+            mainTxt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+                    "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            okBtnTxt = "Agree",
+            cancelBtnTxt = "Disagree"
         )
         basicDialog.show(supportFragmentManager, "basic_dialog")
         basicDialog.setOnButtonClickListener(object : BasicDialog.BasicDialogListeners {
@@ -70,4 +102,23 @@ class MainActivity : AppCompatActivity() {
 
         })
     }
+
+    private fun openCheckBoxDialog() {
+        val list = arrayListOf("Twitter", "Google", "Instagram", "Facebook")
+
+        val checkBoxDialog = CheckBoxDialog(list, "Social medias")
+        checkBoxDialog.setOnChooseClickListener(object : CheckBoxDialog.OnChooseClickListener {
+            override fun chooseClick(chosenList: List<String>) {
+                val stringBuilder = StringBuilder()
+                for (i in list) {
+                    stringBuilder.append("$i ")
+                }
+                Toast.makeText(this@MainActivity, stringBuilder.toString(), Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        })
+        checkBoxDialog.show(supportFragmentManager, "checkbox_dialog")
+    }
+
 }
