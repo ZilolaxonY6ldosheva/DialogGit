@@ -36,7 +36,7 @@ dependencies {
 | Component | Description |
 | --- | --- | 
 | `BasicDialog`| Simple alert dialog with: `Title, Main text, Negative and Positive Button` |  
-| `CheckBoxDialog`| `CheckBox dialog with: `Title of checkbox value` |
+| `CheckBoxDialog`| CheckBox dialog with: `Title of checkbox value` |
 | `DateAndTimeDialog`| Date and Time picker dialog |
 | `WifiDIalog`| Wi-fi bottomsheetDialog with : `Wi-fi name, Signal, SSID, Security` |
 | `Colorialog`| ColorPicker bottomSheetDialog |  
