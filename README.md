@@ -26,7 +26,7 @@
 
 ```
 dependencies {
-	implementation 'com.github.ZilolaxonY6ldosheva:DialogGit:1.0.0'
+	implementation 'com.github.ZilolaxonY6ldosheva:DialogGit:1.0.5'
 }
 ```
 
